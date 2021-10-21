@@ -5,16 +5,20 @@ import connectDB from './config/db.js';
 import { notFound, errorHandler } from './middleware/errorMiddleware.js';
 
 import productRoutes from './routes/productRoutes.js';
+import userRoutes from './routes/userRoutes.js';
 
 dotenv.config();
 connectDB();
 const app = express();
+
+app.use(express.json()); // Body parser
 
 app.get('/', (req, res) => {
   res.send('server running');
 });
 
 app.use('/products', productRoutes);
+app.use('/users', userRoutes);
 
 // Middleware
 app.use(notFound);
